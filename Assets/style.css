@@ -1,0 +1,19 @@
+.jumbotron {
+    text-align: center;
+    background-color: grey;
+    color: rgb(167, 195, 248);
+    border-radius: 0;
+    border-bottom: 10px solid rgb(167, 195, 248);
+  }
+  .location{
+    background-color: rgb(190, 196, 202);
+  }
+  .text{
+    font-family: 'Acme', sans-serif;
+  }
+  .details{
+    font-family: 'Orbitron', sans-serif;
+  }
+  .icon{
+    max-width: 50px;
+  }
