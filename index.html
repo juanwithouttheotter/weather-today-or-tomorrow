@@ -21,20 +21,22 @@
 
   </header>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="col-md-3 location">
+
+      <div class="col location">
         <div class="text">Search for a City: </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control city" aria-label="City search" aria-describedby="basic-addon2">
+          <input type="text" class="form-control city" aria-label="City search" placeholder="City,ST" />
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button"><i class="fas fa-search-location"></i></button>
+            <button class="btn btn-primary submit" type="button"><i class="fas fa-search-location"></i></button>
           </div>
         </div>
       </div>
-      <div class="col-md-8 ml-2">
-        <div class="row col-md-12 today border border-secondary rounded">
-          <p id="currentDay" class="lead"></p>
+
+      <div class="col-md-9 mx-2">
+        <div class="row col-md-12 my-2 border border-secondary rounded today">
+          
         </div>
         <div class="row col-md-12 forecast"></div>
 
