@@ -1,9 +1,4 @@
 $(document).ready(function () {
-  var UVIndex;
-
-
-
-
 
   var appendToday = function (response) {
     var UVIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=2e066e75d160bdff4f8fab272ec499de&lat=${response.coord.lat}&lon=${response.coord.lon}`
