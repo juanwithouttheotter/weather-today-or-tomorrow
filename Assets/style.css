@@ -14,9 +14,32 @@
   .details{
     font-family: 'Open Sans', sans-serif;
   }
+  .index{
+    border-radius: 5px;
+    padding: 5px;
+  }
+  /* UV color indicators */
+  .UV-low{
+    background-color: rgb(21, 184, 21);
+  }
+  .UV-moderate{
+    background-color: rgb(250, 234, 16);
+  }
+  .UV-high{
+    background-color: rgb(233, 155, 29);
+  }
+  .UV-veryHigh{
+    background-color: rgb(184, 45, 21);
+  }
+  .UV-extreme{
+    background-color: rgb(169, 25, 206);
+  }
+
+  /* forecast card */
   .icon{
     max-width: 50px;
   }
   .forecast-card{
     background-color: rgb(167, 195, 248);
   }
+ 
