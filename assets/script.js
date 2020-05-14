@@ -1,5 +1,7 @@
 $(document).ready(function () {
-  var pastCities = {};
+  var pastCities = [];
+
+
   var appendToday = function (response) {
     var UVIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=2e066e75d160bdff4f8fab272ec499de&lat=${response.coord.lat}&lon=${response.coord.lon}`
     var calendarDate = moment().format('l');
@@ -57,7 +59,11 @@ $(document).ready(function () {
 
   var citySearch = function (cityState) {
     cityState = cityState.charAt(0).toUpperCase() + cityState.slice(1);
-    console.log(cityState);
+    pastCities.unshift(cityState);
+    if(pastCities.length > 5 ){
+      pastCities.pop();
+    }
+    console.log(pastCities);
     $(".past-cities").prepend(`
       <button class="btn my-1 border rounded citybtn">${cityState}</button>
     
@@ -85,7 +91,7 @@ $(document).ready(function () {
     $(".forecast-card").remove();
   }
 
-  
+
   //retrieves the html from the button clicked
   $(document).on('click', '.citybtn', function() {
     cleanUp();
@@ -101,7 +107,6 @@ $(document).ready(function () {
     getLocation(cityState);
     citySearch(cityState);
     $(".city").val('');
-    
   });
 
 
