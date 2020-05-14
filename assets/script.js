@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+  var pastCities = {};
   var appendToday = function (response) {
     var UVIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=2e066e75d160bdff4f8fab272ec499de&lat=${response.coord.lat}&lon=${response.coord.lon}`
     var calendarDate = moment().format('l');
@@ -16,24 +16,22 @@ $(document).ready(function () {
       `);
 
     $.get(UVIndexURL, function (response) {
-      console.log(response);
       var UVIndex = response.value;
-      console.log(UVIndex);
       $("div.index").html(UVIndex);
 
       if (UVIndex <= 2) {
         $(".index").addClass("UV-low");
 
-      }else if (UVIndex > 2 && UVIndex <= 5.99) {
+      } else if (UVIndex > 2 && UVIndex <= 5.99) {
         $(".index").addClass("UV-moderate");
 
-      }else if (UVIndex >= 6 && UVIndex <= 7.99) {
+      } else if (UVIndex >= 6 && UVIndex <= 7.99) {
         $(".index").addClass("UV-high");
 
-      }else if (UVIndex >= 8 && UVIndex <= 10.99) {
+      } else if (UVIndex >= 8 && UVIndex <= 10.99) {
         $(".index").addClass("UV-veryHigh");
 
-      }else{
+      } else {
         $(".index").addClass("UV-extreme");
       }
     });
@@ -57,27 +55,31 @@ $(document).ready(function () {
     }
   }
 
+  var citySearch = function (cityState) {
+    cityState = cityState.charAt(0).toUpperCase() + cityState.slice(1);
+    console.log(cityState);
+    $(".past-cities").prepend(`
+      <button class="btn my-1 border rounded citybtn">${cityState}</button>
+    
+    `);
+  }
 
-  //need to make a second call to get the altitude
-  var response = function (urlToday, urlWeek) {
+  // function that handles both api calls 
 
+  var getLocation = function () {
+    var cityState = $(".city").val();
+    citySearch(cityState);
+    $(".city").val('');
+    var urlToday = `https://api.openweathermap.org/data/2.5/weather?q=${cityState}&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
+    var urlWeek = `https://api.openweathermap.org/data/2.5/forecast?q=${cityState}&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
     $.get(urlToday, function (response) {
       appendToday(response);
 
     });
-
     $.get(urlWeek, function (response) {
       appendWeek(response);
 
     });
-  }
-
-  var getLocation = function (cityState) {
-    cityState = $(".city").val();
-    $(".city").val('');
-    var urlToday = `https://api.openweathermap.org/data/2.5/weather?q=${cityState},us&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
-    var urlWeek = `https://api.openweathermap.org/data/2.5/forecast?q=${cityState},us&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
-    response(urlToday, urlWeek);
   }
 
   var cleanUp = function () {
@@ -85,7 +87,7 @@ $(document).ready(function () {
     $(".forecast-card").remove();
   }
 
-
+  
 
   $(".submit").on('click', function () {
     cleanUp();
