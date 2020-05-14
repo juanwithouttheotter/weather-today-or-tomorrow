@@ -86,10 +86,12 @@ $(document).ready(function () {
     $(".weather-today").remove();
     $(".forecast-card").remove();
   }
+  $(document).on('click', '.citybtn', function() {
+    var cityname = $(this).closest(".citybtn").html();
+    console.log(cityname);
+  });
 
-  
-
-  $(".submit").on('click', function () {
+  $(".submit").on('click', function() {
     cleanUp();
     getLocation();
   });
