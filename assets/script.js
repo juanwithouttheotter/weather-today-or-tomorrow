@@ -66,10 +66,8 @@ $(document).ready(function () {
 
   // function that handles both api calls 
 
-  var getLocation = function () {
-    var cityState = $(".city").val();
-    citySearch(cityState);
-    $(".city").val('');
+  var getLocation = function(cityState) {
+  
     var urlToday = `https://api.openweathermap.org/data/2.5/weather?q=${cityState}&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
     var urlWeek = `https://api.openweathermap.org/data/2.5/forecast?q=${cityState}&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
     $.get(urlToday, function (response) {
@@ -86,14 +84,24 @@ $(document).ready(function () {
     $(".weather-today").remove();
     $(".forecast-card").remove();
   }
+
+  
+  //retrieves the html from the button clicked
   $(document).on('click', '.citybtn', function() {
-    var cityname = $(this).closest(".citybtn").html();
-    console.log(cityname);
+    cleanUp();
+    var cityState = $(this).closest(".citybtn").html();
+    console.log(cityState);
+    getLocation(cityState);
+
   });
 
   $(".submit").on('click', function() {
     cleanUp();
-    getLocation();
+    var cityState = $(".city").val();
+    getLocation(cityState);
+    citySearch(cityState);
+    $(".city").val('');
+    
   });
 
 
