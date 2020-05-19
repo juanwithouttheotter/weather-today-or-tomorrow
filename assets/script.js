@@ -1,5 +1,12 @@
 $(document).ready(function () {
-  var pastCities = [];
+  
+  if (localStorage.getItem('pastCities') !== null){
+    var pastCities = JSON.parse(localStorage.getItem('pastCities'));
+    console.log(pastCities);
+  }else {
+    var pastCities = [];
+    console.log(pastCities + " else");
+  }
 
 
   var appendToday = function (response) {
@@ -60,10 +67,11 @@ $(document).ready(function () {
   var citySearch = function (cityState) {
     cityState = cityState.charAt(0).toUpperCase() + cityState.slice(1);
     pastCities.unshift(cityState);
-    if(pastCities.length > 5 ){
+    localStorage.setItem('pastCities', JSON.stringify(pastCities));
+
+    if (pastCities.length > 5) {
       pastCities.pop();
     }
-    console.log(pastCities);
     $(".past-cities").prepend(`
       <button class="btn my-1 border rounded citybtn">${cityState}</button>
     
@@ -72,8 +80,8 @@ $(document).ready(function () {
 
   // function that handles both api calls 
 
-  var getLocation = function(cityState) {
-  
+  var getLocation = function (cityState) {
+
     var urlToday = `https://api.openweathermap.org/data/2.5/weather?q=${cityState}&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
     var urlWeek = `https://api.openweathermap.org/data/2.5/forecast?q=${cityState}&appid=2e066e75d160bdff4f8fab272ec499de&units=imperial`;
     $.get(urlToday, function (response) {
@@ -91,24 +99,37 @@ $(document).ready(function () {
     $(".forecast-card").remove();
   }
 
+  var startPage = function(pastCities){
+    for(cities in pastCities){
+      $(".past-cities").append(`
+      <button class="btn my-1 border rounded citybtn">${pastCities[cities]}</button>
+    
+    `);
+    }
+    var startWeather = pastCities[0];
+    console.log(startWeather);
+    getLocation(startWeather);
+  }
+
 
   //retrieves the html from the button clicked
-  $(document).on('click', '.citybtn', function() {
+  $(document).on('click', '.citybtn', function () {
     cleanUp();
     var cityState = $(this).closest(".citybtn").html();
     console.log(cityState);
     getLocation(cityState);
 
   });
-
-  $(".submit").on('click', function() {
+  
+  //wipes the screen then runs other functions. 
+  $(".submit").on('click', function () {
     cleanUp();
     var cityState = $(".city").val();
     getLocation(cityState);
     citySearch(cityState);
     $(".city").val('');
   });
-
+  startPage(pastCities);
 
 
 
