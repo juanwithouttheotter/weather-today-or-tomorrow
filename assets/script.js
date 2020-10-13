@@ -8,20 +8,19 @@ $(document).ready(function () {
     console.log(pastCities + " else");
   }
 
-
   var appendToday = function (response) {
     var UVIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=2e066e75d160bdff4f8fab272ec499de&lat=${response.coord.lat}&lon=${response.coord.lon}`
     var calendarDate = moment().format('l');
     $(".today").append(`
-  <div class="container weather-today">
-    <h2 class="row col-md-12 text">${response.name} \(${calendarDate}\)
-      <img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png" alt="${response.weather[0].main} icon" class="icon"/>
-    </h2>
-    <div class="row my-2 details"> Temperature: ${response.main.temp}\&degF </div>
-    <div class="row my-2 details"> Wind: ${response.wind.speed} mph,  ${response.wind.deg}\&deg</div>
-    <div class="row my-2 details"> Humidity: ${response.main.humidity}% </div>
-    <div class="row my-2 details"> UV Index: <div class="index"></div></div>
-  </div>
+      <div class="container weather-today">
+        <h2 class="row col-md-12 text">${response.name} \(${calendarDate}\)
+          <img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png" alt="${response.weather[0].main} icon" class="icon"/>
+        </h2>
+        <div class="row my-2 details"> Temperature: ${response.main.temp}\&degF </div>
+        <div class="row my-2 details"> Wind: ${response.wind.speed} mph,  ${response.wind.deg}\&deg</div>
+        <div class="row my-2 details"> Humidity: ${response.main.humidity}% </div>
+        <div class="row my-2 details"> UV Index: <div class="index"></div></div>
+      </div>
       `);
 
     $.get(UVIndexURL, function (response) {
