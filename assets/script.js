@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  
-  if (localStorage.getItem('pastCities') !== null){
+
+  if (localStorage.getItem('pastCities') !== null) {
     var pastCities = JSON.parse(localStorage.getItem('pastCities'));
     console.log(pastCities);
-  }else {
+  } else {
     var pastCities = [];
     console.log(pastCities + " else");
   }
@@ -99,8 +99,8 @@ $(document).ready(function () {
     $(".forecast-card").remove();
   }
 
-  var startPage = function(pastCities){
-    for(cities in pastCities){
+  var startPage = function (pastCities) {
+    for (cities in pastCities) {
       $(".past-cities").append(`
       <button class="btn my-1 border rounded citybtn">${pastCities[cities]}</button>
     
@@ -120,7 +120,7 @@ $(document).ready(function () {
     getLocation(cityState);
 
   });
-  
+
   //wipes the screen then runs other functions. 
   $(".submit").on('click', function () {
     cleanUp();
@@ -129,6 +129,19 @@ $(document).ready(function () {
     citySearch(cityState);
     $(".city").val('');
   });
+
+  $(".city").on("keyup",
+    function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        cleanUp();
+        var cityState = $(".city").val();
+        getLocation(cityState);
+        citySearch(cityState);
+        $(".city").val('');
+
+      }
+    })
   startPage(pastCities);
 
 
