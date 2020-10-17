@@ -5,44 +5,47 @@
     border-radius: 0;
     border-bottom: 10px solid rgb(167, 195, 248);
   }
-  .location{
+  .location {
     background-color: rgb(190, 196, 202);
   }
-  .text{
+  .text {
     font-family: 'Acme', sans-serif;
   }
-  .details{
+  .details {
     font-family: 'Open Sans', sans-serif;
   }
-  .index{
+  .index {
     border-radius: 5px;
     padding: 5px;
   }
   /* UV color indicators */
-  .UV-low{
+  .UV-low {
     background-color: rgb(21, 184, 21);
   }
-  .UV-moderate{
+  .UV-moderate {
     background-color: rgb(250, 234, 16);
   }
-  .UV-high{
+  .UV-high {
     background-color: rgb(233, 155, 29);
   }
-  .UV-veryHigh{
+  .UV-veryHigh {
     background-color: rgb(184, 45, 21);
   }
-  .UV-extreme{
+  .UV-extreme {
     background-color: rgb(169, 25, 206);
   }
 
   /* forecast card */
-  .icon{
+  .icon {
     max-width: 50px;
   }
-  .forecast-card{
+  .forecast-card {
     background-color: rgb(167, 195, 248);
   }
-  .citybtn{
+  .citybtn {
     background-color: rgb(167, 195, 248); 
+  }
+  .homeBtn {
+    float: left;
   }
  
