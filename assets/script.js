@@ -7,9 +7,10 @@ $(document).ready(function () {
     var pastCities = [];
     console.log(pastCities + " else");
   }
+  var number = "2e066e75d160bdff4f8fab272ec499de"
 
   var appendToday = function (response) {
-    var UVIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=2e066e75d160bdff4f8fab272ec499de&lat=${response.coord.lat}&lon=${response.coord.lon}`
+    var UVIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${number}&lat=${response.coord.lat}&lon=${response.coord.lon}`
     var calendarDate = moment().format('l');
     $(".today").append(`
       <div class="container weather-today">
